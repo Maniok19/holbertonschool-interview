@@ -1,6 +1,7 @@
 #!/usr/bin/python3
+""" woooooooooooooooooooooo po po po po po """
 def canUnlockAll(boxes):
-    """woooooooooooooooooooooo """
+    """ woooooooooooooooooooooo po po po po po """
     opened = {0}
     ukeys = list(boxes[0])
     while ukeys:
