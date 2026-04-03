@@ -1,5 +1,7 @@
 #!/usr/bin/python3
 """ woooooooooooooooooooooo po po po po po """
+
+
 def canUnlockAll(boxes):
     """ woooooooooooooooooooooo po po po po po """
     opened = {0}
@@ -10,6 +12,7 @@ def canUnlockAll(boxes):
             opened.add(key)
             ukeys.extend(boxes[key])
     return len(opened) == len(boxes)
+
 
 if __name__ == "__main__":
     canUnlockAll
