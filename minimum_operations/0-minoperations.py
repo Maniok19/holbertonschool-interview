@@ -1,4 +1,5 @@
 #!/usr/bin/python3
+"""Return the minimum hahahahahahahahahahaReturn the minimum hahahahahahahahahaha"""
 def minOperations(n):
     """Return the minimum hahahahahahahahahaha"""
     if not isinstance(n, int) or n < 2:
