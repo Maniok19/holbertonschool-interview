@@ -1,4 +1,4 @@
-#include "binary_tree.h"
+#include "binary_trees.h"
 
 static size_t tree_size(const heap_t *tree)
 {

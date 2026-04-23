@@ -1,6 +1,6 @@
 #include <stdlib.h>
 #include <stdio.h>
-#include "binary_tree.h"
+#include "binary_trees.h"
 
 /**
  * _binary_tree_delete - Deallocate a binary tree
