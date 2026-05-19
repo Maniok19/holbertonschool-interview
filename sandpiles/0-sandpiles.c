@@ -77,21 +77,24 @@ void sandpiles_sum(int grid1[3][3], int grid2[3][3])
 		for (j = 0; j < 3; j++)
 		{
 			grid1[i][j] = grid1[i][j] + grid2[i][j];
+			if (grid1[i][j] > 3)
+				ctrl = 1;
 		}
 	}
-	while (ctrl == 0)
+	while (ctrl == 1)
 	{
-		ctrl = 1;
+	
 		printf("=\n");
 		print_grid(grid1);
 		sandpile_eq(grid1);
+		ctrl = 0;
 		for (i = 0; i < 3; i++)
 		{
 			j = 0;
 			for (j = 0; j < 3; j++)
 			{
 				if (grid1[i][j] > 3)
-					ctrl = 0;
+					ctrl = 1;
 			}
 		}
 	}
