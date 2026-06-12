@@ -47,10 +47,11 @@ def parse_line(line):
 		status_code = int(parts[-2])
 		file_size = int(parts[-1])
 		
-		if status_code in status_codes:
-			total_file_size += file_size
-			status_codes[status_code] += 1
-			line_count += 1
+		total_file_size += file_size
+		if status_code not in status_codes:
+			status_codes[status_code] = 0
+		status_codes[status_code] += 1
+		line_count += 1
 	except (ValueError, IndexError):
 		pass
 
@@ -63,10 +64,9 @@ def main():
 		
 		if line_count % 10 == 0 and line_count > 0:
 			print_stats()
-
-	# Print final stats after EOF
-	if line_count > 0:
-		print_stats()
+	
+	# Always print final stats (including empty input)
+	print_stats()
 
 if __name__ == "__main__":
 	main()
