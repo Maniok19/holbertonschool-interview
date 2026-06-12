@@ -1,4 +1,9 @@
 #!/usr/bin/python3
+"""
+0-stats module
+
+This module does file statistics/analysis tasks.
+"""
 import sys
 import signal
 
