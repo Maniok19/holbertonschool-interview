@@ -43,14 +43,17 @@ def parse_line(line):
         if len(parts) < 2:
             return
 
-        # int() handles negative numbers and all valid integer representations
         file_size = int(parts[-1])
-        status_code = int(parts[-2])
 
+        status_code_str = parts[-2]
         total_file_size += file_size
 
-        if status_code in status_codes:
-            status_codes[status_code] += 1
+        try:
+            status_code = int(status_code_str)
+            if status_code in status_codes:
+                status_codes[status_code] += 1
+        except ValueError:
+            pass
 
         line_count += 1
 
