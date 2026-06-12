@@ -64,5 +64,10 @@ def main():
 		if line_count % 10 == 0 and line_count > 0:
 			print_stats()
 
+	# Print final stats after EOF
+	if line_count > 0:
+		print_stats()
+
 if __name__ == "__main__":
 	main()
+
