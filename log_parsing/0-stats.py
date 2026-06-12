@@ -35,25 +35,34 @@ def signal_handler(sig, frame):
 signal.signal(signal.SIGINT, signal_handler)
 
 def parse_line(line):
-	"""Parse a single line and update metrics if valid"""
-	global total_file_size, line_count
-	
-	try:
-		parts = line.strip().split()
-		
-		if len(parts) < 7:
-			return
-		
-		status_code = int(parts[-2])
-		file_size = int(parts[-1])
-		
-		total_file_size += file_size
-		if status_code not in status_codes:
-			status_codes[status_code] = 0
-		status_codes[status_code] += 1
-		line_count += 1
-	except (ValueError, IndexError):
-		pass
+    """Parse a single line and update metrics if valid"""
+    global total_file_size, line_count
+    
+    try:
+        parts = line.strip().split()
+        
+        if len(parts) < 2:
+            return
+        
+        file_size_str = parts[-1]
+        status_code_str = parts[-2]
+        
+        if not file_size_str.lstrip('-').isdigit() or not status_code_str.isdigit():
+            return
+            
+        file_size = int(file_size_str)
+        status_code = int(status_code_str)
+        
+        if status_code < 100 or status_code > 599:
+            return
+            
+        total_file_size += file_size
+        if status_code not in status_codes:
+            status_codes[status_code] = 0
+        status_codes[status_code] += 1
+        line_count += 1
+    except (ValueError, IndexError):
+        pass
 
 def main():
 	"""Main function to read stdin line by line"""
