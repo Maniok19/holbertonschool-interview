@@ -35,17 +35,25 @@ def signal_handler(sig, frame):
 signal.signal(signal.SIGINT, signal_handler)
 
 def parse_line(line):
+    """Parse a single line and update metrics if valid"""
     global total_file_size, line_count
+
     try:
         parts = line.strip().split()
         if len(parts) < 2:
             return
+
+        # int() handles negative numbers and all valid integer representations
         file_size = int(parts[-1])
         status_code = int(parts[-2])
+
         total_file_size += file_size
+
         if status_code in status_codes:
             status_codes[status_code] += 1
+
         line_count += 1
+
     except (ValueError, IndexError):
         pass
 
