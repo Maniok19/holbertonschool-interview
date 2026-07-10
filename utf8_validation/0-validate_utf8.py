@@ -4,18 +4,18 @@
 def validUTF8(data):
     """
     Determines if a given data set represents a valid UTF-8 encoding.
-    
+
     Args:
-        data: List of integers, each representing 1 byte (only 8 LSBits considered)
-    
+        data: List of integers, each representing 1 byte
+
     Returns:
         bool: True if data is valid UTF-8 encoding, False otherwise
     """
     remaining_bytes = 0
-    
+
     for byte in data:
         byte = byte & 0xFF
-        
+
         if remaining_bytes == 0:
             if (byte >> 5) == 0b110:
                 remaining_bytes = 1
