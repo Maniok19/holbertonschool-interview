@@ -47,31 +47,31 @@ int slide_line(int *line, size_t size, int direction)
     }
     else if (direction == SLIDE_RIGHT)
     {
-        pos = size - 1;
+        pos = size;
         last_merged = 0;
 
         for (i = size; i > 0; i--)
         {
             if (line[i - 1] != 0)
             {
-                if (!last_merged && pos < size - 1 && line[pos + 1] == line[i - 1])
+                if (!last_merged && pos < size && line[pos] == line[i - 1])
                 {
-                    line[pos + 1] *= 2;
+                    line[pos] *= 2;
                     last_merged = 1;
                 }
                 else
                 {
+                    pos--;
                     line[pos] = line[i - 1];
                     if (pos != i - 1)
                         line[i - 1] = 0;
                     last_merged = 0;
-                    pos--;
                 }
             }
         }
 
         /* Fill remaining positions with zeros */
-        for (i = 0; i <= pos; i++)
+        for (i = 0; i < pos; i++)
             line[i] = 0;
     }
     else
