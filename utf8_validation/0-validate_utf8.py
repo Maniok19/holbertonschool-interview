@@ -1,4 +1,13 @@
 #!/usr/bin/python3
+    """
+    Determines if a given data set represents a valid UTF-8 encoding.
+    
+    Args:
+        data: List of integers, each representing 1 byte (only 8 LSBits considered)
+    
+    Returns:
+        bool: True if data is valid UTF-8 encoding, False otherwise
+    """
 def validUTF8(data):
     """
     Determines if a given data set represents a valid UTF-8 encoding.
