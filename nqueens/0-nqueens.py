@@ -1,47 +1,69 @@
 #!/usr/bin/python3
 import sys
 
-def check_other_queen(pos, row, col):
-    for r, c in pos:
-        if c == col:
+
+def is_safe(board, row, col):
+    """Check if a queen can be placed at board[row][col]"""
+    # Check this column
+    for i in range(row):
+        if board[i] == col:
             return False
-        if abs(r - row) == abs(c - col):
+    
+    # Check upper left diagonal
+    for i in range(row):
+        if board[i] == col - (row - i):
             return False
+    
+    # Check upper right diagonal
+    for i in range(row):
+        if board[i] == col + (row - i):
+            return False
+    
     return True
 
-def compute_queens(n, pos):
-    row = len(pos)
+
+def solve_nqueens(n, row, board, solutions):
+    """Recursively solve N queens using backtracking"""
     if row == n:
-        print(pos)
+        # Found a solution, add it to solutions
+        solution = [[i, board[i]] for i in range(n)]
+        solutions.append(solution)
         return
+    
+    for col in range(n):
+        if is_safe(board, row, col):
+            board[row] = col
+            solve_nqueens(n, row + 1, board, solutions)
+            # Backtrack
+            board[row] = -1
 
-    for j in range(n):
-        if check_other_queen(pos, row, j):
-            pos.append((row, j))
-            compute_queens(n, pos)
-            pos.pop()
-
-def check_all_start(n, pos=[]):
-    for k in range(n):
-        i_pos = [(0, k)]
-        compute_queens(n, i_pos)
 
 def main():
+    # Check number of arguments
     if len(sys.argv) != 2:
         print("Usage: nqueens N")
         sys.exit(1)
-
+    
+    # Try to convert argument to integer
     try:
         n = int(sys.argv[1])
     except ValueError:
         print("N must be a number")
         sys.exit(1)
-
+    
+    # Check if N is at least 4
     if n < 4:
         print("N must be at least 4")
         sys.exit(1)
-    result = check_all_start(n)
-    return result
+    
+    # Solve N queens
+    board = [-1] * n
+    solutions = []
+    solve_nqueens(n, 0, board, solutions)
+    
+    # Print all solutions
+    for solution in solutions:
+        print(solution)
 
 
 if __name__ == "__main__":
