@@ -3,6 +3,7 @@
 0_main
 """
 
+
 def rain(walls):
     total = 0
 
