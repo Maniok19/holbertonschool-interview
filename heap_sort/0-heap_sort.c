@@ -1,6 +1,5 @@
 #include "sort.h"
 
-
 /**
  * swap - swap two members of array
  * @dest : member a
@@ -17,12 +16,13 @@ void swap(int *dest, int *src)
 }
 
 /**
- * sift_down - swap two members of array
- * @array : input orgfhz
- * @start : input orgfhz
- * @end : ligfzif zefuhmo
+ * sift_down - restore max heap property
+ * @array : input array
+ * @start : start index
+ * @end : end index
+ * @size : size of array
  */
-void sift_down(int *array, int start, int end)
+void sift_down(int *array, int start, int end, size_t size)
 {
 	int root = start;
 
@@ -39,12 +39,13 @@ void sift_down(int *array, int start, int end)
 			return;
 
 		swap(&array[root], &array[swap_i]);
+		print_array(array, size);
 		root = swap_i;
 	}
 }
 
 /**
- * heap_sort - goooood function that sort array
+ * heap_sort - sorts an array using heap sort
  * @array : input to sort
  * @size : size of array
  * return : nothing
@@ -59,14 +60,14 @@ void heap_sort(int *array, size_t size)
 		if (start > 0)
 		{
 			start--;
-			sift_down(array, start, end);
+			sift_down(array, start, end, size);
 		}
 		else
 		{
 			end--;
 			swap(&array[end], &array[0]);
 			print_array(array, size);
-			sift_down(array, 0, end);
+			sift_down(array, 0, end, size);
 		}
 	}
 }
